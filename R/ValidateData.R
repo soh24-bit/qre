@@ -58,3 +58,7 @@ validate_qre_inputs <- function(payoffs_p1, payoffs_p2, observed_data) {
 
   invisible(NULL)
 }
+
+calculate_observed_frequencies <- function(observed_data, payoffs_p1, payoffs_p2) {
+
+}
