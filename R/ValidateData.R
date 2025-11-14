@@ -1,8 +1,8 @@
-#' Title
+#' Validate Input
 #'
-#' @param payoffs_p1
-#' @param payoffs_p2
-#' @param observed_data
+#' @param payoffs_p1 Matrix of Player 1 Payoff
+#' @param payoffs_p2 Matrix of Player 2 Payoff
+#' @param observed_data Observed Strategy Choices
 #'
 #' @returns NULL (throws error if validation fails)
 #' @export
