@@ -2,11 +2,14 @@ Package: qre
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person("Leo", "Oh", , "soh24@tamu.edu", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: GPL (>= 3)
+    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+Description: qre packages solves for the QRE of a game by finding the 
+    rationality parameter, lambda, that best explains a set of observed 
+    outcomes. A plotting method to help users visualize and assess the 
+    model's fit.
+
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-URL: https://github.com/soh24-bit/qre
-BugReports: https://github.com/soh24-bit/qre/issues
