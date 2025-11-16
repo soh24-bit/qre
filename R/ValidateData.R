@@ -68,5 +68,17 @@ calculate_observed_frequencies <- function(observed_data, payoffs_p1, payoffs_p2
   p1_counts <- table(factor(observed_data[[1]], levels = p1_strategies))
   p2_counts <- table(factor(observed_data[[2]], levels = p2_strategies))
 
+  # Convert to proportions
+  p1_freq <- as.numeric(p1_counts / sum(p1_counts))
+  p2_freq <- as.numeric(p2_counts / sum(p2_counts))
+
+  names(p1_freq) <- p1_strategies
+  names(p2_freq) <- p2_strategies
+
+  list(
+    p1 = p1_freq,
+    p2 = p2_freq,
+    n = nrow(observed_data)
+  )
 
 }
