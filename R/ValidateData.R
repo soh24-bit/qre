@@ -61,4 +61,12 @@ validate_qre_inputs <- function(payoffs_p1, payoffs_p2, observed_data) {
 
 calculate_observed_frequencies <- function(observed_data, payoffs_p1, payoffs_p2) {
 
+  p1_strategies <- rownames(payoffs_p1)
+  p2_strategies <- colnames(payoffs_p2)
+
+  # Count frequency of each strategy
+  p1_counts <- table(factor(observed_data[[1]], levels = p1_strategies))
+  p2_counts <- table(factor(observed_data[[2]], levels = p2_strategies))
+
+
 }
