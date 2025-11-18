@@ -42,5 +42,22 @@ solve_qre <- function(lambda, payoffs_p1, payoffs_p2) {
 
     c(f_p1, f_p2, f_sum_p1, f_sum_p2)
   }
+
+  result <- rootSolve::multiroot(
+    f = qre_system,
+    start = c(rep(1/n_p1, n_p1), rep(1/n_p2, n_p2)), # Start with uniform probabilities
+    positive = TRUE  # Probabilities must be non-negative
+  )
+
+  p1_probs <- result$root[1:n_p1]
+  p2_probs <- result$root[(n_p1+1):(n_p1+n_p2)]
+
+  names(p1_probs) <- rownames(payoffs_p1)
+  names(p2_probs) <- colnames(payoffs_p2)
+
+  list(
+    p1 = as.numeric(p1_probs),
+    p2 = as.numeric(p2_probs)
+  )
 }
 
