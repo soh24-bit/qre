@@ -15,3 +15,6 @@ URL: https://github.com/soh24-bit/qre
 BugReports: https://github.com/soh24-bit/qre/issues
 Imports: 
     rootSolve
+Depends: 
+    R (>= 3.5)
+LazyData: true
