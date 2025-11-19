@@ -1,13 +1,10 @@
-#' Title
+#' qre Solver
 #'
-#' @param lambda
-#' @param payoffs_p1
-#' @param payoffs_p2
+#' @param lambda Rationality parameter that's non-negative
+#' @param payoffs_p1 Payoff matrix for Player 1
+#' @param payoffs_p2 Payoff matrix for Player 2
 #'
-#' @returns
-#' @export
-#'
-#' @examples
+#' @returns A list with equilibrium strategy for both players
 solve_qre <- function(lambda, payoffs_p1, payoffs_p2) {
 
   n_p1 <- nrow(payoffs_p1)
