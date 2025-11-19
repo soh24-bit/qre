@@ -5,9 +5,6 @@
 #' @param observed_data Observed Strategy Choices
 #'
 #' @returns NULL (throws error if validation fails)
-#' @export
-#'
-#' @examples
 validate_qre_inputs <- function(payoffs_p1, payoffs_p2, observed_data) {
 
   # Check payoff matrices are numeric
