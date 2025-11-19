@@ -67,7 +67,7 @@ The theoretical equilibrium is that the player always choose to defect
 as it is the dominant strategy.
 
 ``` r
-fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data = example_data, lower_bound = 0.0001)
+fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data = example_data, lower_bound = 0.001)
 print(fit)
 #> $lambda
 #> [1] 0.2856439
