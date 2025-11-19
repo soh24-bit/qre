@@ -35,24 +35,32 @@ I still have to implement the "plot" s3 object and organize the roxygen skeleton
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This example uses data from Embrey, Fréchette, and Yuksel (2018), available from Harvard Dataverse. (https://doi.org/10.7910/DVN/WCHA2J). This is data from classic experiment testing prisoners' dilemma. 
 
 ```{r example}
-## basic example code
+library(qre)
+
+# The data has already been formatted from raw data
+data(example_data)
+head(example_data)
+
+# Payoffs for each 
+# Given in the paper and rescale to avoid overflow
+payoffs_p1 <- matrix(c(51, 5, 87, 39), nrow = 2, byrow = TRUE)/10
+payoffs_p2 <- matrix(c(51, 87, 5, 39), nrow = 2, byrow = TRUE)/10 
+
+rownames(payoffs_p1) <- c("Cooperate", "Defect")
+colnames(payoffs_p2) <- c("Cooperate", "Defect")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+The theoretical equilibrium is that the player always choose to defect as it is the dominant strategy. 
 
-```{r cars}
-summary(cars)
+```{r example2}
+fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data = example_data, lower_bound = 0.1)
+print(fit)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+However, due to the "mistakes" made by the players, we see that the qre is estimating that the players choose to defect at around 72.84%.
 
-You can also embed plots, for example:
 
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.

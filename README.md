@@ -35,32 +35,78 @@ skeleton better.
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This example uses data from Embrey, Fréchette, and Yuksel (2018),
+available from Harvard Dataverse.
+(<https://doi.org/10.7910/DVN/WCHA2J>). This is data from classic
+experiment testing prisoners’ dilemma.
 
 ``` r
-## basic example code
+library(qre)
+
+# The data has already been formatted from raw data
+data(example_data)
+head(example_data)
+#>   p1_choice p2_choice
+#> 1    Defect    Defect
+#> 2    Defect    Defect
+#> 3    Defect    Defect
+#> 4    Defect    Defect
+#> 5    Defect    Defect
+#> 6    Defect    Defect
+
+# Payoffs for each 
+# Given in the paper and rescale to avoid overflow
+payoffs_p1 <- matrix(c(51, 5, 87, 39), nrow = 2, byrow = TRUE)/10
+payoffs_p2 <- matrix(c(51, 87, 5, 39), nrow = 2, byrow = TRUE)/10 
+
+rownames(payoffs_p1) <- c("Cooperate", "Defect")
+colnames(payoffs_p2) <- c("Cooperate", "Defect")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+The theoretical equilibrium is that the player always choose to defect
+as it is the dominant strategy.
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data = example_data, lower_bound = 0.0001)
+print(fit)
+#> $lambda
+#> [1] 0.2856439
+#> 
+#> $probs_p1
+#> [1] 0.2715637 0.7284363
+#> 
+#> $probs_p2
+#> [1] 0.2715637 0.7284363
+#> 
+#> $observed_freqs
+#> $observed_freqs$p1
+#> Cooperate    Defect 
+#>  0.271564  0.728436 
+#> 
+#> $observed_freqs$p2
+#> Cooperate    Defect 
+#>  0.271564  0.728436 
+#> 
+#> $observed_freqs$n
+#> [1] 16880
+#> 
+#> 
+#> $loglik
+#> [1] -19743.13
+#> 
+#> $payoffs_p1
+#>           [,1] [,2]
+#> Cooperate  5.1  0.5
+#> Defect     8.7  3.9
+#> 
+#> $payoffs_p2
+#>      Cooperate Defect
+#> [1,]       5.1    8.7
+#> [2,]       0.5    3.9
+#> 
+#> attr(,"class")
+#> [1] "qre_fit"
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+However, due to the “mistakes” made by the players, we see that the qre
+is estimating that the players choose to defect at around 72.84%.
