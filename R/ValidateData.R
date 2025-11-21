@@ -56,6 +56,13 @@ validate_qre_inputs <- function(payoffs_p1, payoffs_p2, observed_data) {
   invisible(NULL)
 }
 
+#' Strategy Counter
+#'
+#' @param observed_data Data that contains strategy of players
+#' @param payoffs_p1 Player 1 payoff
+#' @param payoffs_p2 Player 2 payoff
+#'
+#' @returns Count of strategies for each players
 calculate_observed_frequencies <- function(observed_data, payoffs_p1, payoffs_p2) {
 
   p1_strategies <- rownames(payoffs_p1)
