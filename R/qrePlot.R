@@ -1,13 +1,30 @@
-#' Title
+#' A plot showing Convergence of Strategies
 #'
-#' @param x
+#' @param x fit object
 #' @param ...
 #'
-#' @returns
+#' @returns A plot showing convergence to Mixed Strategy Nash Equilibrium labeled with estimated Lambda
 #' @export
 #'
 #' @examples
-#' @importFrom dplyr %>%
+#' # Battle of the Sexes: coordination game with asymmetric preferences
+#' # Multiple Nash equilibria: (Opera, Opera) and (Football, Football)
+#' # Also has mixed strategy Nash: P1 plays Opera 2/3, P2 plays Football 2/3
+#' payoffs_p1 <- matrix(c(2, 0, 0, 1), nrow = 2, byrow = TRUE)
+#' payoffs_p2 <- matrix(c(1, 0, 0, 2), nrow = 2, byrow = TRUE)
+#' rownames(payoffs_p1) <- c("Opera", "Football")
+#' colnames(payoffs_p2) <- c("Opera", "Football")
+#'
+#' # Simulate data with coordination attempts
+#' set.seed(456)
+#' observed_data <- data.frame(
+#'   p1_choice = sample(c("Opera", "Football"), 150, replace = TRUE, prob = c(0.60, 0.40)),
+#'   p2_choice = sample(c("Opera", "Football"), 150, replace = TRUE, prob = c(0.45, 0.55))
+#' )
+#'
+#' # Estimate QRE
+#' fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data)
+#' plot(fit)
 plot.qre_fit <- function(x, ...) {
 
   # Lambda range
@@ -27,24 +44,33 @@ plot.qre_fit <- function(x, ...) {
 
   qre_data <- do.call(rbind, qre_data)
 
+  # Player 1 graph
   player1_graph <- qre_data %>%
-    filter(player == "Player 1") %>%
-    ggplot(aes(x = lambda, y = probability, color = strategy)) +
-    geom_line() + geom_vline(xintercept = x$lambda, linetype = "dashed") +
-    labs(title = "Player 1 Strategy Convergence", color = "Strategy") +
-    xlab(expression(lambda)) + ylab("Probability") +
-    annotate("text", x = x$lambda + 0.05, y = 0.03, label = "hat(lambda)", parse = TRUE, color = "red") +
-    theme_minimal()
+    dplyr::filter(player == "Player 1") %>%
+    ggplot2::ggplot(ggplot2::aes(x = lambda, y = probability, color = strategy)) +
+    ggplot2::geom_line(linewidth = 1.2) +
+    ggplot2::geom_vline(xintercept = x$lambda, linetype = "dashed", linewidth = 1) +
+    ggplot2::labs(title = "Player 1 Strategy Convergence", color = "Strategy") +
+    ggplot2::xlab(expression(lambda)) +
+    ggplot2::ylab("Probability") +
+    ggplot2::annotate("text", x = x$lambda + 0.05, y = 0.03,
+                      label = "hat(lambda)", parse = TRUE, color = "red") +
+    ggplot2::theme_minimal()
 
+  # Player 2 graph
   player2_graph <- qre_data %>%
-    filter(player == "Player 2") %>%
-    ggplot(aes(x = lambda, y = probability, color = strategy)) +
-    geom_line() + geom_vline(xintercept = x$lambda, linetype = "dashed") +
-    labs(title = "Player 2 Strategy Convergence", color = "Strategy") +
-    xlab(expression(lambda)) + ylab("Probability") +
-    annotate("text", x = x$lambda + 0.05, y = 0.03, label = "hat(lambda)", parse = TRUE, color = "red") +
-    theme_minimal()
+    dplyr::filter(player == "Player 2") %>%
+    ggplot2::ggplot(ggplot2::aes(x = lambda, y = probability, color = strategy)) +
+    ggplot2::geom_line(linewidth = 1.2) +
+    ggplot2::geom_vline(xintercept = x$lambda, linetype = "dashed", linewidth = 1) +
+    ggplot2::labs(title = "Player 2 Strategy Convergence", color = "Strategy") +
+    ggplot2::xlab(expression(lambda)) +
+    ggplot2::ylab("Probability") +
+    ggplot2::annotate("text", x = x$lambda + 0.05, y = 0.03,
+                      label = "hat(lambda)", parse = TRUE, color = "red") +
+    ggplot2::theme_minimal()
 
-  player1_graph + player2_graph
+  # Combine plots
+  player1_graph + player2_graph + patchwork::plot_layout(guides = "collect")
 
 }

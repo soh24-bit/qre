@@ -18,23 +18,24 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' # Matching Pennies: Pure mixed strategy game
-#' # Nash equilibrium: Both players play 50% Heads, 50% Tails
-#' payoffs_p1 <- matrix(c(1, -1, -1, 1), nrow = 2, byrow = TRUE)
-#' payoffs_p2 <- matrix(c(-1, 1, 1, -1), nrow = 2, byrow = TRUE)
-#' rownames(payoffs_p1) <- c("Heads", "Tails")
-#' colnames(payoffs_p2) <- c("Heads", "Tails")
+#' # Battle of the Sexes: coordination game with asymmetric preferences
+#' # Multiple Nash equilibria: (Opera, Opera) and (Football, Football)
+#' # Also has mixed strategy Nash: P1 plays Opera 2/3, P2 plays Football 2/3
+#' payoffs_p1 <- matrix(c(2, 0, 0, 1), nrow = 2, byrow = TRUE)
+#' payoffs_p2 <- matrix(c(1, 0, 0, 2), nrow = 2, byrow = TRUE)
+#' rownames(payoffs_p1) <- c("Opera", "Football")
+#' colnames(payoffs_p2) <- c("Opera", "Football")
 #'
-#' set.seed(123)
+#' # Simulate data with coordination attempts
+#' set.seed(456)
 #' observed_data <- data.frame(
-#'   p1_choice = sample(c("Heads", "Tails"), 200, replace = TRUE, prob = c(0.52, 0.48)),
-#'   p2_choice = sample(c("Heads", "Tails"), 200, replace = TRUE, prob = c(0.48, 0.52))
+#'   p1_choice = sample(c("Opera", "Football"), 150, replace = TRUE, prob = c(0.60, 0.40)),
+#'   p2_choice = sample(c("Opera", "Football"), 150, replace = TRUE, prob = c(0.45, 0.55))
 #' )
 #'
+#' # Estimate QRE
 #' fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data)
 #' print(fit)
-#' }
 estimate_qre <- function(payoffs_p1, payoffs_p2, observed_data, lambda_start = 1, lower_bound = 0.01,
                          upper_bound = 50) {
 
