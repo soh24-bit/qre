@@ -71,6 +71,10 @@ plot.qre_fit <- function(x, ...) {
     ggplot2::theme_minimal()
 
   # Combine plots
-  player1_graph + player2_graph + patchwork::plot_layout(guides = "collect")
+  patchwork::wrap_plots(
+    player1_graph,
+    player2_graph,
+    guides = "collect"
+  )
 
 }
