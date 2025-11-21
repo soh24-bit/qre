@@ -29,10 +29,6 @@ You can install the development version of qre from [GitHub](https://github.com/
 pak::pak("soh24-bit/qre")
 ```
 
-## What's Left?
-
-I still have to implement the "plot" s3 object and organize the roxygen skeleton better.
-
 ## Example
 
 This example uses data from Embrey, Fréchette, and Yuksel (2018), available from Harvard Dataverse. (https://doi.org/10.7910/DVN/WCHA2J). This is data from classic experiment testing prisoners' dilemma. 
@@ -53,14 +49,16 @@ rownames(payoffs_p1) <- c("Cooperate", "Defect")
 colnames(payoffs_p2) <- c("Cooperate", "Defect")
 ```
 
-The theoretical equilibrium is that the player always choose to defect as it is the dominant strategy. 
+The theoretical equilibrium is that the player always choose to defect as it is the dominant strategy.
+
+However, due to the "mistakes" made by the players, we see that the qre is estimating that the players choose to defect at around 72.84%.
 
 ```{r example2}
 fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data = example_data, lower_bound = 0.001)
 print(fit)
+
+plot(fit)
 ```
 
-However, due to the "mistakes" made by the players, we see that the qre is estimating that the players choose to defect at around 72.84%.
-
-
+The plot shows the eventual convergence to dominant strategy as lambda goes up.
 
