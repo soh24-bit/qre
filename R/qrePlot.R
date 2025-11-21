@@ -22,7 +22,7 @@
 #'   p2_choice = sample(c("Opera", "Football"), 150, replace = TRUE, prob = c(0.45, 0.55))
 #' )
 #'
-#' # Estimate QRE
+#' # Plot QRE
 #' fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data)
 #' plot(fit)
 plot.qre_fit <- function(x, ...) {
