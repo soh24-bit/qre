@@ -1,3 +1,9 @@
+#' Log-likelihood calculator
+#'
+#' @param observed_freqs Count of strategies from actual data
+#' @param qre_probs qre probabilities calculated from solve_qre fn
+#'
+#' @returns Log-likelihood value
 ll <- function(observed_freqs, qre_probs) {
 
   n <- observed_freqs$n
@@ -10,6 +16,14 @@ ll <- function(observed_freqs, qre_probs) {
   ll_p1 + ll_p2
 }
 
+#' Negative Log-likelihood calculator
+#'
+#' @param lambda Lambda Input
+#' @param observed_freqs Count of strategies from actual data
+#' @param payoffs_p1 Player 1 payoff
+#' @param payoffs_p2 Player 2 payoff
+#'
+#' @returns Negative Log-likelihood
 nll <- function(lambda, observed_freqs, payoffs_p1, payoffs_p2) {
 
   # lambda must be non-negative
