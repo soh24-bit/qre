@@ -6,7 +6,8 @@ Authors@R:
 Description: qre packages solves for the QRE of a game by finding the 
     rationality parameter, lambda, that best explains a set of observed 
     outcomes. A plotting method to help users visualize and assess the 
-    model's fit.
+    model's fit. Additionally, print and summary method has been added
+    to give users easy access to useful information regarding the model.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
