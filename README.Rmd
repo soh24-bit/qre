@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-In classic game theory, the Nash Equilibrium concept assumes that players are perfectly rational and will always choose the strategy that maximizes their payoff, given their opponents' actions. However, empirical studies of human behavior show that players often make mistakes. The Quantal Response Equilibrium (QRE) is a widely used model that relaxes the assumption of perfect rationality by introducing probabilistic choice. The goal of qre is to solve for the QRE of a game by finding the rationality parameter, lambda, that best explains a set of observed outcomes. Additionally, "plot" s3 object helps users visualize and assess the model's fit.
+In classic game theory, the Nash Equilibrium concept assumes that players are perfectly rational and will always choose the strategy that maximizes their payoff, given their opponents' actions. However, empirical studies of human behavior show that players often make mistakes. The Quantal Response Equilibrium (QRE) is a widely used model that relaxes the assumption of perfect rationality by introducing probabilistic choice. The goal of qre is to solve for the QRE of a game by finding the rationality parameter, lambda, that best explains a set of observed outcomes. Additionally, *plot* s3 object helps users visualize and assess the model's fit while *print* and *summary* gives easy access to useful information from the model.
 
 ## Installation
 
@@ -51,14 +51,26 @@ colnames(payoffs_p2) <- c("Cooperate", "Defect")
 
 The theoretical equilibrium is that the player always choose to defect as it is the dominant strategy.
 
-However, due to the "mistakes" made by the players, we see that the qre is estimating that the players choose to defect at around 72.84%.
-
 ```{r example2}
 fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data = example_data, lower_bound = 0.001)
 print(fit)
+```
 
+*print* s3 method gives basic convergence info
+
+```{r example3}
+summary(fit)
+s <- summary(fit)
+s$probs_p1
+s$probs_p2
+```
+
+*summary* s3 method gives more detailed info regarding the fit object. Since it's an object, you can assign it and access the element in fit outputs.
+
+Due to the "mistakes" made by the players, we see that the qre is estimating that the players choose to defect at around 72.84%.
+
+```{r example4}
 plot(fit)
 ```
 
-The plot shows the eventual convergence to dominant strategy as lambda goes up.
-
+*plot* s3 method shows the eventual convergence to the Theoretical Equilibrium (Nash Equilibrium) as lambda goes up.

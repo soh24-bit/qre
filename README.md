@@ -15,8 +15,9 @@ mistakes. The Quantal Response Equilibrium (QRE) is a widely used model
 that relaxes the assumption of perfect rationality by introducing
 probabilistic choice. The goal of qre is to solve for the QRE of a game
 by finding the rationality parameter, lambda, that best explains a set
-of observed outcomes. Additionally, “plot” s3 object helps users
-visualize and assess the model’s fit.
+of observed outcomes. Additionally, *plot* s3 object helps users
+visualize and assess the model’s fit while *print* and *summary* gives
+easy access to useful information from the model.
 
 ## Installation
 
@@ -61,54 +62,57 @@ colnames(payoffs_p2) <- c("Cooperate", "Defect")
 The theoretical equilibrium is that the player always choose to defect
 as it is the dominant strategy.
 
-However, due to the “mistakes” made by the players, we see that the qre
-is estimating that the players choose to defect at around 72.84%.
-
 ``` r
 fit <- estimate_qre(payoffs_p1, payoffs_p2, observed_data = example_data, lower_bound = 0.001)
 print(fit)
-#> $lambda
-#> [1] 0.2856439
 #> 
-#> $probs_p1
-#> [1] 0.2715637 0.7284363
-#> 
-#> $probs_p2
-#> [1] 0.2715637 0.7284363
-#> 
-#> $observed_freqs
-#> $observed_freqs$p1
-#> Cooperate    Defect 
-#>  0.271564  0.728436 
-#> 
-#> $observed_freqs$p2
-#> Cooperate    Defect 
-#>  0.271564  0.728436 
-#> 
-#> $observed_freqs$n
-#> [1] 16880
-#> 
-#> 
-#> $loglik
-#> [1] -19743.13
-#> 
-#> $payoffs_p1
-#>           [,1] [,2]
-#> Cooperate  5.1  0.5
-#> Defect     8.7  3.9
-#> 
-#> $payoffs_p2
-#>      Cooperate Defect
-#> [1,]       5.1    8.7
-#> [2,]       0.5    3.9
-#> 
-#> attr(,"class")
-#> [1] "qre_fit"
+#> QRE Fit
+#> -------
+#> Lambda: 0.2856 
+#> Log-likelihood: -19743.13 
+#> Sample size: 16880
+```
 
+*print* s3 method gives basic convergence info
+
+``` r
+summary(fit)
+#> 
+#> QRE Summary
+#> ===========
+#> 
+#> Lambda: 0.2856 
+#> Log-likelihood: -19743.13 
+#> N: 16880 
+#> 
+#> Player 1:
+#>           Predicted Observed
+#> Cooperate     0.272    0.272
+#> Defect        0.728    0.728
+#> 
+#> Player 2:
+#>           Predicted Observed
+#> Cooperate     0.272    0.272
+#> Defect        0.728    0.728
+s <- summary(fit)
+s$probs_p1
+#> [1] 0.2715637 0.7284363
+s$probs_p2
+#> [1] 0.2715637 0.7284363
+```
+
+*summary* s3 method gives more detailed info regarding the fit object.
+Since it’s an object, you can assign it and access the element in fit
+outputs.
+
+Due to the “mistakes” made by the players, we see that the qre is
+estimating that the players choose to defect at around 72.84%.
+
+``` r
 plot(fit)
 ```
 
-<img src="man/figures/README-example2-1.png" width="100%" />
+<img src="man/figures/README-example4-1.png" width="100%" />
 
-The plot shows the eventual convergence to dominant strategy as lambda
-goes up.
+*plot* s3 method shows the eventual convergence to the Theoretical
+Equilibrium (Nash Equilibrium) as lambda goes up.
