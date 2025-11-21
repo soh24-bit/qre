@@ -53,7 +53,7 @@ plot.qre_fit <- function(x, ...) {
     ggplot2::labs(title = "Player 1 Strategy Convergence", color = "Strategy") +
     ggplot2::xlab(expression(lambda)) +
     ggplot2::ylab("Probability") +
-    ggplot2::annotate("text", x = x$lambda + 0.05, y = 0.03,
+    ggplot2::annotate("text", x = x$lambda + diff(range(lambda_seq)) * 0.04, y = 0.03,
                       label = "hat(lambda)", parse = TRUE, color = "red") +
     ggplot2::theme_minimal()
 
@@ -66,7 +66,7 @@ plot.qre_fit <- function(x, ...) {
     ggplot2::labs(title = "Player 2 Strategy Convergence", color = "Strategy") +
     ggplot2::xlab(expression(lambda)) +
     ggplot2::ylab("Probability") +
-    ggplot2::annotate("text", x = x$lambda + 0.05, y = 0.03,
+    ggplot2::annotate("text", x = x$lambda + diff(range(lambda_seq)) * 0.04, y = 0.03,
                       label = "hat(lambda)", parse = TRUE, color = "red") +
     ggplot2::theme_minimal()
 
@@ -76,5 +76,4 @@ plot.qre_fit <- function(x, ...) {
     player2_graph,
     guides = "collect"
   )
-
 }
