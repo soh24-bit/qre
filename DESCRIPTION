@@ -1,5 +1,5 @@
 Package: qre
-Title: What the Package Does (One Line, Title Case)
+Title: Estimate and Plot QRE Convergence
 Version: 0.0.0.9000
 Authors@R: 
     person("Leo", "Oh", , "soh24@tamu.edu", role = c("aut", "cre"))
