@@ -60,7 +60,7 @@ validate_qre_inputs <- function(payoffs_p1, payoffs_p2, observed_data) {
 #'
 #' @param observed_data Observed Strategy Choices
 #' @param payoffs_p1 Matrix of Player 1 Payoff
-#' @param payoffs_p2 Matrix of Player 1 Payoff
+#' @param payoffs_p2 Matrix of Player 2 Payoff
 #'
 #' @returns Count of strategies for each players
 calculate_observed_frequencies <- function(observed_data, payoffs_p1, payoffs_p2) {
