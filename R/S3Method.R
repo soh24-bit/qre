@@ -91,6 +91,62 @@ print.qre_fit <- function(x, ...) {
   cat("Lambda:", round(x$lambda, 4), "\n")
   cat("Log-likelihood:", round(x$loglik, 2), "\n")
   cat("Sample size:", x$observed_freqs$n, "\n")
-  invisible(x)
+  invisible(x) # avoid double print
 }
 
+#' Summary of fit
+#'
+#' @param x fit object
+#' @param ...
+#'
+#' @returns summary.qre_fit object
+#' @export
+summary.qre_fit <- function(x, ...) {
+
+  out <- list(
+    lambda = x$lambda,
+    loglik = x$loglik,
+    n = x$observed_freqs$n,
+    probs_p1 = x$probs_p1,
+    probs_p2 = x$probs_p2,
+    observed_p1 = x$observed_freqs$p1,
+    observed_p2 = x$observed_freqs$p2
+  )
+
+  class(out) <- "summary.qre_fit"
+  return(out)
+}
+
+#' print summary object
+#'
+#' @param x fit object
+#' @param ...
+#'
+#' @returns printed summary
+#' @export
+print.summary.qre_fit <- function(x, ...) {
+
+  cat("\nQRE Summary\n")
+  cat("===========\n\n")
+
+  cat("Lambda:", round(x$lambda, 4), "\n")
+  cat("Log-likelihood:", round(x$loglik, 2), "\n")
+  cat("N:", x$n, "\n\n")
+
+  cat("Player 1:\n")
+  p1_df <- data.frame(
+    Predicted = round(x$probs_p1, 3),
+    Observed = round(x$observed_p1, 3)
+  )
+  print(p1_df)
+
+  cat("\nPlayer 2:\n")
+  p2_df <- data.frame(
+    Predicted = round(x$probs_p2, 3),
+    Observed = round(x$observed_p2, 3)
+  )
+  print(p2_df)
+
+  cat("\n")
+  invisible(x)
+}
