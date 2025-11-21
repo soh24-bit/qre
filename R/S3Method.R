@@ -78,6 +78,13 @@ plot.qre_fit <- function(x, ...) {
   )
 }
 
+#' Print basic info
+#'
+#' @param x fit object
+#' @param ...
+#'
+#' @returns printed info
+#' @export
 print.qre_fit <- function(x, ...) {
   cat("\nQRE Fit\n")
   cat("-------\n")
@@ -86,3 +93,4 @@ print.qre_fit <- function(x, ...) {
   cat("Sample size:", x$observed_freqs$n, "\n")
   invisible(x)
 }
+
