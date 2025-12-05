@@ -13,8 +13,8 @@
 #' \item{probs_p2}{QRE strategy probabilities for Player 2}
 #' \item{observed_freqs}{Observed frequencies from the data}
 #' \item{loglik}{Maximum log-likelihood value}
-#' \item{payoffs_p1}{Payoff matrix for Player 1}
-#' \item{payoffs_p2}{Payoff matrix for Player 2}
+#' \item{payoffs_p1}{Matrix of Player 1 Payoff}
+#' \item{payoffs_p2}{Matrix of Player 2 Payoff}
 #' @export
 #'
 #' @examples
