@@ -87,7 +87,7 @@ plot.qre_fit <- function(x, ...) {
 #' @export
 print.qre_fit <- function(x, ...) {
   cat("\nQRE Fit\n")
-  cat("-------\n")
+  cat("-------\n\n")
   cat("Lambda:", round(x$lambda, 4), "\n")
   cat("Log-likelihood:", round(x$loglik, 2), "\n")
   cat("Sample size:", x$observed_freqs$n, "\n")
