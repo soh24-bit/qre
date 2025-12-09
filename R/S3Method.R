@@ -96,21 +96,21 @@ print.qre_fit <- function(x, ...) {
 
 #' Summary of fit
 #'
-#' @param x fit object
+#' @param object fit object
 #' @param ...
 #'
 #' @returns summary.qre_fit object
 #' @export
-summary.qre_fit <- function(x, ...) {
+summary.qre_fit <- function(object, ...) {
 
   out <- list(
-    lambda = x$lambda,
-    loglik = x$loglik,
-    n = x$observed_freqs$n,
-    probs_p1 = x$probs_p1,
-    probs_p2 = x$probs_p2,
-    observed_p1 = x$observed_freqs$p1,
-    observed_p2 = x$observed_freqs$p2
+    lambda = object$lambda,
+    loglik = object$loglik,
+    n = object$observed_freqs$n,
+    probs_p1 = object$probs_p1,
+    probs_p2 = object$probs_p2,
+    observed_p1 = object$observed_freqs$p1,
+    observed_p2 = object$observed_freqs$p2
   )
 
   class(out) <- "summary.qre_fit"

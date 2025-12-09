@@ -4,10 +4,10 @@
 \alias{summary.qre_fit}
 \title{Summary of fit}
 \usage{
-\method{summary}{qre_fit}(x, ...)
+\method{summary}{qre_fit}(object, ...)
 }
 \arguments{
-\item{x}{fit object}
+\item{object}{fit object}
 
 \item{...}{}
 }
